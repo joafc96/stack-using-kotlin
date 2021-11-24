@@ -44,7 +44,7 @@ class Stack<T> {
     return "Stack is empty."
     }
     
-    // o(1) -> appending a new node to the top node
+    // o(1) -> appending a new node on top of the top node
     func push(_ val: T) {
         let newNode: Node<T> = Node(val)
         
@@ -55,7 +55,18 @@ class Stack<T> {
             self.topNode = newNode
         }
         self.size += 1
-        
+    }
+    
+    // o(1) -> removes the top node from stack
+    func pop() {
+        if let safeTopNode = self.topNode {
+            let tempNode = safeTopNode
+            self.topNode = tempNode.next
+            tempNode.next = nil
+            self.size -= 1
+        } else {
+            return
+        }
     }
 }
 
@@ -66,8 +77,8 @@ backgroundStack.push("chrome")
 backgroundStack.push("mozilla")
 backgroundStack.push("instgram")
 backgroundStack.push("whatsapp")
+backgroundStack.pop()
 
 print(backgroundStack.toString())
-print(backgroundStack.size)
 
 
